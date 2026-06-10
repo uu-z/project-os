@@ -40,6 +40,20 @@ single observation
 -> SKILL.md / references
 ```
 
+## Thin writer
+
+Default mutation path:
+
+```bash
+python3 scripts/kernel_writer.py upsert --kernel /path/to/KERNEL.md --pattern-id <id> ...
+```
+
+This writer is intentionally narrow:
+
+- it only edits `## Candidate Patterns`
+- it removes the placeholder row when the first real candidate is added
+- it updates counters and timestamps for repeated observations
+
 ## Promotion gate
 
 Promote only when the pattern is:

@@ -29,6 +29,22 @@ repo loop
 
 This means the skill does not grow directly from one project's noise.
 
+## Thin kernel writer
+
+Use the thin writer when a loop needs to record one repeated candidate pattern without touching stable kernel sections:
+
+```bash
+python3 scripts/kernel_writer.py upsert \
+  --kernel /path/to/KERNEL.md \
+  --pattern-id repo-cand-001 \
+  --set "symptom=The same blocker keeps being rediscovered" \
+  --set "proposed_rule=Freeze one blocker owner doc first" \
+  --set "evidence=loop-3 in repo-x" \
+  --set "status=candidate"
+```
+
+This command edits only the `## Candidate Patterns` table.
+
 ## What it creates
 
 Default owner-doc stack:
@@ -52,6 +68,10 @@ Optional base layer:
 .
 ├── KERNEL.md
 ├── SKILL.md
+├── scripts/
+│   ├── kernel_writer.py
+│   └── tests/
+│       └── test_kernel_writer.py
 ├── agents/
 │   └── openai.yaml
 └── references/

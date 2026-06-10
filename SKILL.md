@@ -274,6 +274,8 @@ When applying this skill to a repo:
 9. Add `KERNEL.md` if local operating patterns need a stable evolution layer.
 10. Make daily loops read only the hot owner docs, local kernel, and machine truth.
 
+When the repo already has a `KERNEL.md`, use the thin kernel writer pattern: only update `Candidate Patterns`, never the stable kernel sections.
+
 ## Anti-Patterns
 
 Do not:

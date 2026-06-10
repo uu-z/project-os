@@ -63,6 +63,12 @@ Use this section to record tempting but false patterns.
 | `project-os/KERNEL.md` stable section | Manual promotion only. |
 | `SKILL.md` and `references/` | Change only after a promoted kernel rule is accepted. |
 
+Writer:
+
+```bash
+python3 scripts/kernel_writer.py upsert --kernel /path/to/KERNEL.md --pattern-id <id> ...
+```
+
 ## Evolution Pipeline
 
 ```text
