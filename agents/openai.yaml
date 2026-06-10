@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project OS"
+  short_description: "Document-first project operating system"
+  default_prompt: "Use $project-os to turn this project into a document-first operating system with unique strategy, architecture, engineering, project, blockers, and harness truth."
