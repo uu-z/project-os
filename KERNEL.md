@@ -36,6 +36,15 @@ It is not the same as:
 | `os-012` | The active goal is the fast-variable execution contract layered on top of the slower `project-os` control plane. | This keeps goals sharp without letting them redefine the operating system. |
 | `os-013` | Every meaningful goal run should write back to `BLOCKERS.md`, `PROJECT.md`, and, when repeated, repo `KERNEL.md`. | The loop should continuously strengthen the project's own control plane. |
 | `os-014` | Repeated repo-level goal learnings may promote into `project-os/KERNEL.md`, and only then into `SKILL.md`. | This is how project work should continuously improve the operating system itself. |
+| `os-015` | `project-os` should stay document-first and must not grow a second scripted control plane. | Repo-owned PM scripts duplicate judgment and create another truth surface. |
+| `os-016` | The main agent's highest-value job is to continuously hold the harness loop as PM, architect, and control tower. | This preserves stage, boundary, blocker, cadence, and deadline coherence. |
+| `os-017` | The main agent should lock exactly one primary blocker at a time. | Multiple simultaneous blockers destroy prioritization and loop focus. |
+| `os-018` | Every loop action should justify how it moves the current milestone or deadline. | This keeps execution tied to delivery instead of interesting side work. |
+| `os-019` | If the main agent drops too often into implementation, stage judgment, scope control, and deadline control are the first likely regressions. | Coding time is cheaper than command attention. |
+| `os-020` | `project-os` should reduce entropy through elegant minimalism, not through layered complexity. | Hidden entropy is still entropy. |
+| `os-021` | A new surface should normally delete, merge, or compress an older surface. | Add-only systems accumulate explanation debt. |
+| `os-022` | Prefer direct end-state shapes over transitional compatibility shapes whenever the decision is already clear. | Transitional layers often preserve the very drift the system is trying to remove. |
+| `os-023` | Human project alignment should collapse into one simple chain: `Ship now -> Stage -> Milestone -> Progress -> One blocker -> Do now`. | Project leads need a fast alignment surface, not an engineering execution card. |
 
 ## Candidate Patterns
 
@@ -72,12 +81,7 @@ Use this section to record tempting but false patterns.
 | `SKILL.md` and `references/` | Change only after a promoted kernel rule is accepted. |
 | Active goal selection | In autopilot mode, derive it from the hot truth stack rather than asking the user to choose every time. |
 | Goal write-back | Goal runs should strengthen the repo control plane first, and the global control plane only through kernel promotion. |
-
-Writer:
-
-```bash
-python3 scripts/kernel_writer.py upsert --kernel /path/to/KERNEL.md --pattern-id <id> ...
-```
+| Repo-owned automation | Optional and external; never the public control surface of `project-os`. |
 
 ## Evolution Pipeline
 

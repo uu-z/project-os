@@ -21,25 +21,6 @@ If the repo already has docs, audit them before trusting them.
 
 When terminology, boundaries, stage labels, or ownership are unclear, use a `grill-with-docs` style pass first: inspect code and docs, resolve what can be resolved from source, then ask only the smallest missing questions.
 
-Also separate three different kinds of truth before writing anything:
-
-- domain truth
-- local project operating truth
-- global `project-os` operating truth
-
-Default execution mode is autopilot:
-
-- if the user provides a clear top-level desired outcome, keep it
-- if the user does not provide a narrower active sub-goal, derive one automatically from the hot truth stack
-- do not stop to ask the user to choose the next obvious loop step
-
-The active goal should not float outside the system:
-
-- `project-os` provides the slow-moving control plane
-- the active goal provides the fast-moving execution contract for this loop
-- every meaningful goal run should feed back into the repo control plane
-- repeated repo learnings may later feed back into `project-os` itself
-
 ## Core Model
 
 Treat project truth as three layers:
@@ -62,15 +43,13 @@ The intent is also simple:
 - solve most project problems at the doc layer first
 - leave only the final implementation and verification gap to the execution loop
 
-Before those three layers, some repos also need two deeper bases:
+Before those three layers, some repos also need one deeper base:
 
 | Layer | Purpose | Change Rate | Truth Form |
 |---|---|---:|---|
 | `L0 domain kernel` | Define the canonical domain vocabulary and concept boundaries | Very slow | `CONTEXT.md` or equivalent glossary/kernel doc |
-| `L0.5 project kernel` | Define repo-specific operating patterns and local evolution candidates | Slow | `KERNEL.md` |
 
-Use `CONTEXT.md` when the project keeps losing time to terminology drift, synonym drift, or architecture arguments caused by fuzzy language.
-Use repo `KERNEL.md` when the project keeps rediscovering the same operating lesson during loops.
+Use this when the project keeps losing time to terminology drift, synonym drift, or architecture arguments caused by fuzzy language.
 
 ## Standard Doc Stack
 
@@ -81,7 +60,7 @@ Default to a `6 + 1` stack:
 | `STRATEGY.md` | Decision | Why this project exists, what this release is, what is explicitly out |
 | `ARCHITECTURE.md` | Decision | What the single-track system is, what the boundaries are, where truth lives |
 | `ENGINEERING.md` | Decision | What counts as the official engineering interface, verification path, and artifact contract |
-| `PROJECT.md` | Execution | What stage the project is in, what milestones exist, who owns what |
+| `PROJECT.md` | Execution | What stage the project is in, what roadmap horizons, milestones, deadlines, workstreams, owners, and current execution window exist |
 | `BLOCKERS.md` | Execution | What currently blocks progress, why, who owns it, what evidence clears it |
 | `HARNESS.md` | Execution | How agents and humans read, write, delegate, update, and escalate |
 | `machine truth` | Machine | The active structured runtime truth such as `manifest.json` or release snapshots |
@@ -103,21 +82,6 @@ Rules:
 - daily loops should not reread the whole `CONTEXT.md` by default
 - agents should reread `CONTEXT.md` only when terminology, ownership, boundary, or protocol meaning is unclear
 
-## Optional Repo `KERNEL.md`
-
-When the repo has repeated execution patterns worth preserving, add or preserve one local `KERNEL.md`:
-
-| File | Layer | Answers |
-|---|---|---|
-| `KERNEL.md` | `L0.5 project kernel` | What repo-specific operating patterns are stable, which local patterns are still candidates, and what may later promote into `project-os` itself |
-
-Rules:
-
-- repo `KERNEL.md` is local operating truth, not global skill truth
-- repo `KERNEL.md` is short enough to stay in the hot loop when present
-- only the candidate section should be auto-edited by ordinary project loops
-- repo `KERNEL.md` may feed `project-os/KERNEL.md`, but should not bypass it
-
 ## Missing-Docs Mode
 
 When the repo does not already have the required owner docs:
@@ -127,7 +91,6 @@ When the repo does not already have the required owner docs:
 3. use a `grill-with-docs` style pass to resolve ambiguous terms and boundaries
 4. create the minimum owner docs needed for the standard stack
 5. freeze the read/write protocol in `HARNESS.md`
-6. create `KERNEL.md` if the repo already shows repeated local operating lessons
 
 Do not wait for perfect documentation before creating the control plane. The first correct version should be small, table-first, and explicit about assumptions.
 
@@ -159,14 +122,61 @@ Enforce these rules:
 1. `STRATEGY.md` owns goals, scope, success, and non-goals.
 2. `ARCHITECTURE.md` owns system shape, boundaries, truth source, and anti-dual-track rules.
 3. `ENGINEERING.md` owns official commands, verification standards, artifact meanings, and implementation constraints.
-4. `PROJECT.md` owns stage, milestones, owners, and deadlines.
+4. `PROJECT.md` owns system-level execution truth: stage, roadmap horizons, milestones, deadlines, workstreams, owners, and the current execution window.
 5. `BLOCKERS.md` owns current blockers and risk movement.
 6. `HARNESS.md` owns the daily loop protocol and agent behavior.
 7. Machine artifacts own current runtime facts.
 8. `CONTEXT.md`, when present, owns canonical domain language and anti-synonym rules.
-9. Repo `KERNEL.md`, when present, owns repo-specific operating patterns and promotion candidates.
 
 If a fact already has an owner document, all other docs must reference it rather than redefining it.
+
+## `PROJECT.md` Scope Rule
+
+Treat `PROJECT.md` as the system execution board, not a temporary task scratchpad.
+
+Use a top-down shape:
+
+- big dimensions first: stage, release lines, roadmap horizons, milestones, deadlines, workstreams
+- small dimensions second: current execution window, next 24h, current review cycle
+
+Rules:
+
+- small dimensions may live in `PROJECT.md` only when they clearly serve the big dimensions
+- blockers still belong in `BLOCKERS.md`
+- ad hoc task piles, issue dumps, and temporary planning fragments do not belong in `PROJECT.md`
+- if `PROJECT.md` can be deleted and nothing strategic changes, it is too small
+
+## Doctor / Align Protocol
+
+When the repo feels drifted, stop implementation first.
+
+Run two lightweight control-tower moves:
+
+1. `doctor`
+2. `align`
+
+`doctor` is a diagnosis pass. It answers:
+
+- is stage judgment still clear
+- is there still only one real blocker
+- has the team reopened `0-90` while pretending to do `90-100`
+- is current work still directly moving the current milestone or deadline
+- have duplicate truths, dual tracks, or stale hot paths reappeared
+
+`align` is the recovery surface. It collapses the project back into one simple human-readable sheet:
+
+1. `Ship now`
+2. `Stage`
+3. `Milestone`
+4. `Progress`
+5. `One blocker`
+6. `Do now`
+
+Logic:
+
+`strategy -> stage -> milestone -> progress -> blocker -> current action`
+
+If a proposed task does not clearly attach to that chain, stop it or defer it.
 
 ## Table-First Rule
 
@@ -190,14 +200,11 @@ Everything else should default to a table:
 - evidence
 - escalation rules
 - read/write rules
-- promotion rules
 
 For ready-made table shapes, read:
 
 - [references/doc-templates.md](references/doc-templates.md)
-- [references/goal-protocol.md](references/goal-protocol.md)
 - [references/harness-protocol.md](references/harness-protocol.md)
-- [references/kernel-protocol.md](references/kernel-protocol.md)
 - [references/doc-audit.md](references/doc-audit.md)
 
 ## Write Rules
@@ -211,7 +218,6 @@ Default write policy:
 | `ENGINEERING.md` | Low |
 | `PROJECT.md` | Daily / milestone-based |
 | `BLOCKERS.md` | Every meaningful loop |
-| `KERNEL.md` candidate section | On repeated local learning only |
 | `HARNESS.md` | Rare |
 | Machine artifacts | Automated |
 
@@ -221,90 +227,26 @@ Agents should not casually rewrite decision-layer docs during daily execution.
 
 Default read order:
 
-1. `KERNEL.md` when present
-2. `STRATEGY.md`
-3. `ARCHITECTURE.md`
-4. `ENGINEERING.md`
-5. `PROJECT.md`
-6. `BLOCKERS.md`
-7. `HARNESS.md`
-8. active machine truth
+1. `STRATEGY.md`
+2. `ARCHITECTURE.md`
+3. `ENGINEERING.md`
+4. `PROJECT.md`
+5. `BLOCKERS.md`
+6. `HARNESS.md`
+7. active machine truth
 
 Default write-back order:
 
 1. update machine truth through the normal system path
 2. update `BLOCKERS.md`
 3. update `PROJECT.md`
-4. update repo `KERNEL.md` candidate section only when the same local lesson has repeated
-5. update `HARNESS.md` only if the protocol itself changed
+4. update `HARNESS.md` only if the protocol itself changed
 
 Do not rewrite `STRATEGY.md`, `ARCHITECTURE.md`, or `ENGINEERING.md` unless a real decision changed.
 
 `CONTEXT.md` is not in the default hot read loop. Read it on demand when the loop hits a language or boundary ambiguity.
-Repo `KERNEL.md`, when present, is part of the default hot read loop because it carries local operating lessons.
 
-## Autopilot Mode
-
-`project-os` should normally run as an autopilot operating system, not a passive planner.
-
-Autopilot goal derivation order:
-
-1. user-stated top-level outcome
-2. repo `KERNEL.md`
-3. `STRATEGY.md`
-4. `PROJECT.md`
-5. `BLOCKERS.md`
-6. machine truth
-
-Autopilot loop:
-
-1. read the hot truth stack
-2. derive one active goal
-3. choose one primary blocker
-4. decide whether the blocker is `0-90` or `90-100`
-5. if `0-90`, repair docs or protocol first
-6. if `90-100`, delegate or execute the smallest blocker-clearing move
-7. update machine truth and execution docs
-8. update repo `KERNEL.md` candidate section only if a local lesson repeated
-
-Do not require the user to manually specify the next loop step unless there is a real fork with non-obvious consequences.
-
-## Goal Coupling
-
-Treat the active goal as a derived contract, not a free-floating wish.
-
-Goal source order:
-
-1. explicit user outcome
-2. repo `KERNEL.md`
-3. `STRATEGY.md`
-4. `PROJECT.md`
-5. `BLOCKERS.md`
-6. machine truth
-
-Goal rules:
-
-- one active goal should normally map to one primary blocker
-- the goal should narrow execution, not redefine strategy
-- if a goal exposes missing `0-90` truth, repair the control plane first
-- if a goal clears a blocker, write back to `BLOCKERS.md` and `PROJECT.md`
-- if the same operating lesson repeats, write it into repo `KERNEL.md`
-- only repeated cross-project lessons should reach `project-os/KERNEL.md`
-
-## Main Agent Default
-
-Use these defaults unless the repo has an unusually tiny scope:
-
-- the main agent is not the default implementer
-- the main agent should code only when doing it locally is obviously faster and does not damage project-level attention
-- the main agent should fix the document control plane first, then let subagents execute the final `90-100` implementation loop
-- the main agent should keep autopilot moving unless a real decision fork blocks safe continuation
-
-Interpretation:
-
-- `project-os` is responsible for clarifying the `0-90`
-- workers and loops are responsible for landing the last `90-100`
-- if the main agent is still doing broad implementation, the control plane is probably not frozen enough yet
+Before any substantial execution loop, ask whether the repo first needs `doctor` or `align`.
 
 ## 0-90 / 90-100 Rule
 
@@ -319,23 +261,6 @@ If the team is still arguing daily about stage, scope, ownership, or what "done"
 
 Do not spend implementation effort to compensate for missing control-plane clarity when that clarity should live in the docs.
 
-## Evolution Pipeline
-
-Use this pipeline:
-
-```text
-repo loop
--> repo KERNEL.md
--> project-os KERNEL.md
--> SKILL.md / references
-```
-
-Do not allow:
-
-```text
-repo loop -> direct SKILL.md growth
-```
-
 ## Adoption Workflow
 
 When applying this skill to a repo:
@@ -348,12 +273,7 @@ When applying this skill to a repo:
 6. Collapse the control plane into the standard doc stack.
 7. Move unstable operational status into execution-layer docs or machine artifacts.
 8. Freeze read/write rules in `HARNESS.md`.
-9. Add `KERNEL.md` if local operating patterns need a stable evolution layer.
-10. Make daily loops read only the hot owner docs, local kernel, and machine truth.
-11. Default the repo to autopilot loop execution unless the user explicitly requests plan-only mode.
-12. Make active goals write back into the repo control plane and kernels instead of dying inside chat.
-
-When the repo already has a `KERNEL.md`, use the thin kernel writer pattern: only update `Candidate Patterns`, never the stable kernel sections.
+9. Make daily loops read only the owner docs and machine truth.
 
 ## Anti-Patterns
 
@@ -367,10 +287,15 @@ Do not:
 - allow agents to "figure it out live" every day instead of following the harness
 - trust existing docs without auditing whether they fit the protocol
 - refuse to create docs until all ambiguities are solved
+- turn `PROJECT.md` into a temporary todo list instead of the system execution truth
 
 ## Output Pattern
 
 When using this skill, prefer output in this order:
+
+1. align sheet when drift is suspected
+2. only then the minimum doc or loop changes needed
+3. only then unresolved ambiguities
 
 - Current doc stack
 - Duplicated truths

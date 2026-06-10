@@ -13,16 +13,6 @@ Use this reference when a repo already has documentation and you need to decide 
 | Structure | Is prose hiding what should be a table? | convert to structured format |
 | Loop fit | Should daily loops read it, write it, or ignore it? | assign explicit loop role |
 
-## `KERNEL.md` Test
-
-When a repo has a `KERNEL.md`, ask:
-
-| Question | Good sign | Bad sign |
-|---|---|---|
-| Is it storing repo-specific operating lessons instead of generic strategy prose? | repeated local rules, promotion candidates, write protocol | duplicate goals, duplicate milestones, duplicate blocker board |
-| Is only the candidate section auto-growable? | yes | no; the whole doc mutates freely |
-| Does it feed the global skill through promotion instead of bypassing it? | yes | repo loop edits `SKILL.md` directly |
-
 ## 0-90 Test
 
 Use this forcing question during audits:
@@ -56,6 +46,26 @@ When a repo has a `CONTEXT.md`, ask:
 |---|---|---|
 | Is it acting as a domain kernel instead of a project tracker? | glossary, boundaries, invariants, avoid-language | milestones, blockers, day-by-day execution notes |
 | Does the daily loop need it every time? | no; read on ambiguity | yes; because other owner docs are underspecified |
+
+## `PROJECT.md` Test
+
+When a repo has a `PROJECT.md`, ask:
+
+| Question | Good sign | Bad sign |
+|---|---|---|
+| Is it system-level execution truth instead of a task scratchpad? | stage, release lines, roadmap horizons, milestones, deadlines, workstreams, current execution window | ad hoc todos, loose brainstorms, issue dumps, temporary fragments |
+| Do small dimensions clearly serve big dimensions? | next 24h and current cycle point back to stage, milestone, blocker line | small tasks dominate the document and can be deleted without changing project truth |
+| Can the main agent realign from this file alone? | yes; it tells what line is shipping now, what line is next, and what gate matters | no; it only shows local tasks without system context |
+
+## `doctor / align` Test
+
+When a repo feels drifted, ask:
+
+| Question | Good sign | Bad sign |
+|---|---|---|
+| Can the main agent diagnose drift in one pass? | one clear answer for ship line, stage, milestone, blocker, and continue/stop | multiple conflicting answers across docs |
+| Can the repo collapse to one align sheet? | `Ship now / Stage / Milestone / Progress / One blocker / Do now` is easy to fill | alignment requires reading many task lists or chat fragments |
+| Does `align` reduce scope immediately? | one task survives and side quests get deferred | the protocol generates more planning noise |
 
 ## Grill-With-Docs Use
 

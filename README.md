@@ -1,198 +1,179 @@
 # project-os
 
-`project-os` is a document-first project operating system for AI agents and human teams.
+`project-os` is a document-first operating system for projects.
 
-It pushes most project ambiguity into a small source-of-truth doc stack first, then lets the implementation loop focus only on the last mile.
+Its job is to solve the first `0-90` in documents so the last `90-100` can be executed by workers without reopening strategy every day.
 
-## Core idea
+## One sentence
 
-- `0-90`: solve scope, goals, architecture, stage, blockers, and operating protocol in docs
-- `90-100`: solve only bounded implementation, verification, and blocker clearing in the loop
+One project, one control plane, one harness loop.
 
-If the docs are right, the project should mostly already be right.
+## Philosophy
 
-## Default autopilot
-
-`project-os` should normally run in autopilot.
+`project-os` exists to reduce entropy with elegant minimalism.
 
 That means:
 
-- if the user gives a clear top-level outcome, use it
-- if the user does not give a narrower sub-goal, derive the next active goal automatically
-- do not wait for the user to manually pick every loop step
+- fewer surfaces, not more surfaces
+- stronger owner docs, not more explanatory docs
+- one clear rule that explains many cases
+- direct movement toward the end state, not transitional complexity
 
-Autopilot reads:
+Failure tests:
 
-```text
-KERNEL.md
--> STRATEGY.md
--> PROJECT.md
--> BLOCKERS.md
--> machine truth
-```
+- if a change increases explanation cost, it is probably not elegant
+- if a change adds a new layer without deleting an old one, it is probably not minimal
+- if a change hides entropy instead of removing it, it is probably not progress
 
-Then it picks one active goal, usually the highest-value blocker-moving step.
+## What it is
+
+| Layer | Truth |
+|---|---|
+| Domain | `CONTEXT.md` |
+| Local operating kernel | repo `KERNEL.md` |
+| Decision layer | `STRATEGY.md`, `ARCHITECTURE.md`, `ENGINEERING.md` |
+| Execution layer | `PROJECT.md`, `BLOCKERS.md`, `HARNESS.md` |
+| Machine layer | runtime-owned manifests and artifacts |
+
+## What it is not
+
+- not a script framework
+- not a repo-owned PM bot
+- not a second machine-truth system
+- not a replacement for the main agent's stage judgment
+
+## Default operating model
+
+| Role | Default responsibility |
+|---|---|
+| Main agent | PM + Architect + Control Tower |
+| Worker subagent | bounded implementation |
+| Explorer subagent | targeted fact finding |
+| Verifier subagent | acceptance and regression |
+
+Core rule:
+
+- main agent stays in `0-90` and control-tower work
+- subagents handle `90-100`
+- main agent codes only when local implementation is obviously faster and does not damage project-level attention
+
+The control-tower loop means the main agent keeps locking five things:
+
+1. stage: what is shipping now
+2. boundary: single-track architecture, single entrypoint, single truth source
+3. blocker: exactly one primary blocker
+4. cadence: implement, verify, write back, upgrade
+5. deadline: whether the action directly moves the current milestone
+
+If the main agent codes too often, the first things usually lost are stage judgment, scope control, and deadline control.
+
+## Standard doc stack
+
+| File | Owns |
+|---|---|
+| `STRATEGY.md` | why this project exists now, scope, success, non-goals |
+| `ARCHITECTURE.md` | single-track shape, boundaries, truth sources |
+| `ENGINEERING.md` | official commands, evidence rules, artifact meanings |
+| `PROJECT.md` | stage, milestones, owners, deadlines |
+| `BLOCKERS.md` | primary blocker, supporting blockers, evidence needed |
+| `HARNESS.md` | read order, write order, delegation, escalation |
+
+Optional base docs:
+
+| File | Owns |
+|---|---|
+| `CONTEXT.md` | domain language and anti-synonym rules |
+| `KERNEL.md` | local operating patterns and promotion candidates |
+
+## Harness loop
+
+Read order:
+
+1. `KERNEL.md`
+2. `STRATEGY.md`
+3. `ARCHITECTURE.md`
+4. `ENGINEERING.md`
+5. `PROJECT.md`
+6. `BLOCKERS.md`
+7. `HARNESS.md`
+8. machine truth
+
+Write-back order:
+
+1. refresh machine truth through the real system path
+2. update `BLOCKERS.md`
+3. update `PROJECT.md`
+4. update repo `KERNEL.md` only when a lesson repeats
+5. touch decision docs only when a real decision changed
+
+## Align surface
+
+When the project feels noisy or drifted, stop implementation and collapse status into one align sheet:
+
+1. `Ship now`
+2. `Stage`
+3. `Milestone`
+4. `Progress`
+5. `One blocker`
+6. `Do now`
+
+This is the human alignment surface for strategy, project state, progress, and execution.
+If a task does not clearly attach to that chain, it is probably noise.
+
+## Autopilot meaning
+
+`autopilot` here is a protocol, not a script.
+
+It means the main agent should normally:
+
+1. derive one active goal from the truth stack
+2. keep exactly one primary blocker
+3. decide whether the blocker is `0-90` or `90-100`
+4. repair the control plane first if the problem is still `0-90`
+5. delegate the last-mile implementation if the problem is `90-100`
+6. write reality back into the owner docs
+
+The active loop should always answer one question before acting:
+
+- does this directly move the current milestone or deadline
 
 ## Evolution model
-
-`project-os` now uses a two-kernel model:
-
-- repo `KERNEL.md`: local self-evolution layer for one project
-- `project-os/KERNEL.md`: cross-project self-evolution layer for the operating system itself
-
-Evolution pipeline:
 
 ```text
 repo loop
 -> repo KERNEL.md
--> project-os/KERNEL.md
+-> project-os KERNEL.md
 -> SKILL.md / references
-```
-
-This means the skill does not grow directly from one project's noise.
-
-## project-os + goal
-
-`project-os` and `goal` should form one self-reinforcing loop:
-
-```text
-project-os control plane
--> derive active goal
--> execute one loop
--> write back to repo control plane
--> promote repeated learnings into kernels
--> improve project-os itself
 ```
 
 Rules:
 
-- `project-os` defines what is correct
-- the active goal defines what this loop is trying to finish next
-- goal runs should strengthen the project docs and repo `KERNEL.md`
-- repeated repo learnings may later strengthen `project-os/KERNEL.md`
-
-## Thin kernel writer
-
-Use the thin writer when a loop needs to record one repeated candidate pattern without touching stable kernel sections:
-
-```bash
-python3 scripts/kernel_writer.py upsert \
-  --kernel /path/to/KERNEL.md \
-  --pattern-id repo-cand-001 \
-  --set "symptom=The same blocker keeps being rediscovered" \
-  --set "proposed_rule=Freeze one blocker owner doc first" \
-  --set "evidence=loop-3 in repo-x" \
-  --set "status=candidate"
-```
-
-This command edits only the `## Candidate Patterns` table.
-
-## Bootstrap a new repo
-
-Use the bootstrap script to create the minimum `project-os` control plane in a new repo:
-
-```bash
-python3 scripts/bootstrap_project_os.py --root /path/to/repo --project-name "My Project"
-```
-
-This creates:
-
-- `CONTEXT.md`
-- `KERNEL.md`
-- `STRATEGY.md`
-- `ARCHITECTURE.md`
-- `ENGINEERING.md`
-- `PROJECT.md`
-- `BLOCKERS.md`
-- `HARNESS.md`
-- `artifacts/current/README.md`
-- `.project-os-bootstrap.json`
-
-It does not overwrite existing files unless `--overwrite` is passed.
-
-## Derive the active goal
-
-Use the autopilot goal derivation script to turn the current truth stack into one active goal:
-
-```bash
-python3 scripts/derive_active_goal.py --root /path/to/repo
-```
-
-JSON mode:
-
-```bash
-python3 scripts/derive_active_goal.py --root /path/to/repo --json
-```
-
-Priority order:
-
-1. first concrete P0 blocker
-2. incomplete `0-90` control-plane truth
-3. missing machine-truth ownership
-4. next verification / rehearsal step
-
-Supported layouts:
-
-- root control-plane docs such as `STRATEGY.md`
-- nested ACTUM-style docs such as `docs/actum/STRATEGY.md`
-
-## What it creates
-
-Default owner-doc stack:
-
-- `STRATEGY.md`
-- `ARCHITECTURE.md`
-- `ENGINEERING.md`
-- `PROJECT.md`
-- `BLOCKERS.md`
-- `HARNESS.md`
-- machine truth such as `manifest.json`
-
-Optional base layer:
-
-- `CONTEXT.md` for domain language, terminology boundaries, and anti-synonym drift
-- `KERNEL.md` for repo-specific operating patterns and promotion candidates
+- local learnings do not jump straight into `SKILL.md`
+- only repeated cross-project patterns reach the global kernel
+- `SKILL.md` is a compiled operating surface, not an auto-growth target
+- if a new surface appears, some older surface should usually disappear
 
 ## Repository layout
 
 ```text
 .
 ├── KERNEL.md
+├── README.md
 ├── SKILL.md
-├── scripts/
-│   ├── bootstrap_project_os.py
-│   ├── derive_active_goal.py
-│   ├── kernel_writer.py
-│   └── tests/
-│       ├── test_bootstrap_project_os.py
-│       ├── test_derive_active_goal.py
-│       └── test_kernel_writer.py
-├── agents/
-│   └── openai.yaml
-└── references/
-    ├── doc-audit.md
-    ├── doc-templates.md
-    ├── goal-protocol.md
-    ├── harness-protocol.md
-    └── kernel-protocol.md
+├── references/
+│   ├── doc-audit.md
+│   ├── doc-templates.md
+│   ├── goal-protocol.md
+│   ├── harness-protocol.md
+│   └── kernel-protocol.md
+└── agents/
+    └── openai.yaml
 ```
 
-## Usage
+## Use project-os when
 
-Install or copy this skill into your Codex skills directory as `project-os`, then invoke it when a repo needs:
-
-- one owner doc per important question
-- one repo-level self-evolution layer
-- a stable read/write protocol
-- less “thinking while doing”
-- a narrow execution loop against frozen project truth
-- default autopilot loop execution without requiring manual sub-goal selection
-
-## Design rules
-
-- one important question
-- one owner document
-- one update protocol
-- no duplicated definitions
-- table-first by default
-- no daily free-form rediscovery
+- the team keeps thinking while doing
+- stage and milestone language drift every day
+- blockers are plural and vague
+- multiple docs answer the same question
+- the main agent needs to stay in PM and architecture mode instead of coding-first mode

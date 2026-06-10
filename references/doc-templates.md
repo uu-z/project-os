@@ -12,17 +12,6 @@ Use these as the default table shapes for the control-plane docs.
 | Boundaries | boundary table |
 | Stable invariants | invariant table |
 
-## `KERNEL.md`
-
-| Section | Recommended structure |
-|---|---|
-| One sentence | repo operating-kernel definition |
-| Stable patterns | stable-pattern table |
-| Candidate patterns | candidate table |
-| Promotion upstream | promotion table |
-| Rejected patterns | rejection table |
-| Update protocol | write-rule table |
-
 ## `STRATEGY.md`
 
 | Section | Recommended structure |
@@ -58,10 +47,16 @@ Use these as the default table shapes for the control-plane docs.
 
 | Section | Recommended structure |
 |---|---|
-| Current stage | stage table |
-| Milestones | milestone table |
+| System align | top-level align table |
+| Roadmap horizons | now/next/later table |
+| Release lines | current ship / next-stage / future table |
+| Workstreams | workstream status table |
+| Current stage | stage + gate table |
+| Milestones | milestone ladder |
+| Deadlines / reviews | deadline rule table |
 | Owners | owner table |
 | Timeline | weekly cadence table |
+| Current execution window | current objective / next 24h table |
 | Risks | risk register table |
 
 ## `BLOCKERS.md`
@@ -80,6 +75,8 @@ Use these as the default table shapes for the control-plane docs.
 | Read order | read-order table |
 | Write rules | write matrix |
 | Agent roles | role table |
+| Doctor | drift diagnosis questions |
+| Align sheet | `Ship now / Stage / Milestone / Progress / One blocker / Do now` |
 | Loop steps | loop table |
 | Escalation | escalation table |
 | Stop rules | stop-rule table |

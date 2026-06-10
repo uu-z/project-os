@@ -40,19 +40,15 @@ single observation
 -> SKILL.md / references
 ```
 
-## Thin writer
+## Candidate updates
 
-Default mutation path:
+Default mutation path is protocol-first, not tool-first.
 
-```bash
-python3 scripts/kernel_writer.py upsert --kernel /path/to/KERNEL.md --pattern-id <id> ...
-```
+That means:
 
-This writer is intentionally narrow:
-
-- it only edits `## Candidate Patterns`
-- it removes the placeholder row when the first real candidate is added
-- it updates counters and timestamps for repeated observations
+- update only `## Candidate Patterns`
+- never let routine loops rewrite stable kernel sections
+- if automation exists in a consuming repo, treat it as an implementation detail rather than part of the public `project-os` surface
 
 ## Promotion gate
 
