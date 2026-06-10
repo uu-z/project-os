@@ -51,6 +51,26 @@ repo loop
 
 This means the skill does not grow directly from one project's noise.
 
+## project-os + goal
+
+`project-os` and `goal` should form one self-reinforcing loop:
+
+```text
+project-os control plane
+-> derive active goal
+-> execute one loop
+-> write back to repo control plane
+-> promote repeated learnings into kernels
+-> improve project-os itself
+```
+
+Rules:
+
+- `project-os` defines what is correct
+- the active goal defines what this loop is trying to finish next
+- goal runs should strengthen the project docs and repo `KERNEL.md`
+- repeated repo learnings may later strengthen `project-os/KERNEL.md`
+
 ## Thin kernel writer
 
 Use the thin writer when a loop needs to record one repeated candidate pattern without touching stable kernel sections:
@@ -99,6 +119,7 @@ Optional base layer:
 └── references/
     ├── doc-audit.md
     ├── doc-templates.md
+    ├── goal-protocol.md
     ├── harness-protocol.md
     └── kernel-protocol.md
 ```

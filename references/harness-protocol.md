@@ -7,6 +7,8 @@ The harness starts only after the document operating system has solved most of t
 - `project-os` handles `0-90`
 - the loop handles `90-100`
 
+The active goal is the execution contract for one loop, not a replacement for the control plane.
+
 Default loop mode is autopilot. The user should not have to manually nominate the next obvious step.
 
 ## Read Order
@@ -91,3 +93,13 @@ Choose the active goal in this order:
 4. smallest credible `90-100` blocker-clearing action
 
 The loop should not ask the user to choose among these unless there is a material tradeoff.
+
+## Goal Write-Back
+
+Every meaningful goal loop should update at least one of:
+
+- `BLOCKERS.md`
+- `PROJECT.md`
+- repo `KERNEL.md` candidate section when a lesson repeated
+
+Only repeated cross-project learnings should write forward into `project-os/KERNEL.md`.

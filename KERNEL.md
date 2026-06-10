@@ -33,6 +33,9 @@ It is not the same as:
 | `os-009` | The main agent should fix the document control plane before delegating the final implementation loop. | Most recurring execution waste comes from unresolved `0-90` ambiguity, not missing code. |
 | `os-010` | `project-os` should default to autopilot when the user does not supply a narrower sub-goal. | The user should not need to micromanage the next obvious loop step. |
 | `os-011` | In autopilot, the system should derive one active goal from `KERNEL -> STRATEGY -> PROJECT -> BLOCKERS -> machine truth`. | This keeps execution aligned to frozen truth instead of chat drift. |
+| `os-012` | The active goal is the fast-variable execution contract layered on top of the slower `project-os` control plane. | This keeps goals sharp without letting them redefine the operating system. |
+| `os-013` | Every meaningful goal run should write back to `BLOCKERS.md`, `PROJECT.md`, and, when repeated, repo `KERNEL.md`. | The loop should continuously strengthen the project's own control plane. |
+| `os-014` | Repeated repo-level goal learnings may promote into `project-os/KERNEL.md`, and only then into `SKILL.md`. | This is how project work should continuously improve the operating system itself. |
 
 ## Candidate Patterns
 
@@ -68,6 +71,7 @@ Use this section to record tempting but false patterns.
 | `project-os/KERNEL.md` stable section | Manual promotion only. |
 | `SKILL.md` and `references/` | Change only after a promoted kernel rule is accepted. |
 | Active goal selection | In autopilot mode, derive it from the hot truth stack rather than asking the user to choose every time. |
+| Goal write-back | Goal runs should strengthen the repo control plane first, and the global control plane only through kernel promotion. |
 
 Writer:
 
@@ -82,4 +86,13 @@ repo execution loop
 -> repo KERNEL.md
 -> project-os KERNEL.md
 -> SKILL.md / references
+```
+
+```text
+project-os control plane
+-> active goal
+-> execution loop
+-> repo docs / repo kernel
+-> project-os kernel
+-> stronger project-os control plane
 ```

@@ -33,6 +33,13 @@ Default execution mode is autopilot:
 - if the user does not provide a narrower active sub-goal, derive one automatically from the hot truth stack
 - do not stop to ask the user to choose the next obvious loop step
 
+The active goal should not float outside the system:
+
+- `project-os` provides the slow-moving control plane
+- the active goal provides the fast-moving execution contract for this loop
+- every meaningful goal run should feed back into the repo control plane
+- repeated repo learnings may later feed back into `project-os` itself
+
 ## Core Model
 
 Treat project truth as three layers:
@@ -188,6 +195,7 @@ Everything else should default to a table:
 For ready-made table shapes, read:
 
 - [references/doc-templates.md](references/doc-templates.md)
+- [references/goal-protocol.md](references/goal-protocol.md)
 - [references/harness-protocol.md](references/harness-protocol.md)
 - [references/kernel-protocol.md](references/kernel-protocol.md)
 - [references/doc-audit.md](references/doc-audit.md)
@@ -261,6 +269,28 @@ Autopilot loop:
 
 Do not require the user to manually specify the next loop step unless there is a real fork with non-obvious consequences.
 
+## Goal Coupling
+
+Treat the active goal as a derived contract, not a free-floating wish.
+
+Goal source order:
+
+1. explicit user outcome
+2. repo `KERNEL.md`
+3. `STRATEGY.md`
+4. `PROJECT.md`
+5. `BLOCKERS.md`
+6. machine truth
+
+Goal rules:
+
+- one active goal should normally map to one primary blocker
+- the goal should narrow execution, not redefine strategy
+- if a goal exposes missing `0-90` truth, repair the control plane first
+- if a goal clears a blocker, write back to `BLOCKERS.md` and `PROJECT.md`
+- if the same operating lesson repeats, write it into repo `KERNEL.md`
+- only repeated cross-project lessons should reach `project-os/KERNEL.md`
+
 ## Main Agent Default
 
 Use these defaults unless the repo has an unusually tiny scope:
@@ -321,6 +351,7 @@ When applying this skill to a repo:
 9. Add `KERNEL.md` if local operating patterns need a stable evolution layer.
 10. Make daily loops read only the hot owner docs, local kernel, and machine truth.
 11. Default the repo to autopilot loop execution unless the user explicitly requests plan-only mode.
+12. Make active goals write back into the repo control plane and kernels instead of dying inside chat.
 
 When the repo already has a `KERNEL.md`, use the thin kernel writer pattern: only update `Candidate Patterns`, never the stable kernel sections.
 
