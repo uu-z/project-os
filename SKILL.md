@@ -27,6 +27,12 @@ Also separate three different kinds of truth before writing anything:
 - local project operating truth
 - global `project-os` operating truth
 
+Default execution mode is autopilot:
+
+- if the user provides a clear top-level desired outcome, keep it
+- if the user does not provide a narrower active sub-goal, derive one automatically from the hot truth stack
+- do not stop to ask the user to choose the next obvious loop step
+
 ## Core Model
 
 Treat project truth as three layers:
@@ -229,6 +235,47 @@ Do not rewrite `STRATEGY.md`, `ARCHITECTURE.md`, or `ENGINEERING.md` unless a re
 `CONTEXT.md` is not in the default hot read loop. Read it on demand when the loop hits a language or boundary ambiguity.
 Repo `KERNEL.md`, when present, is part of the default hot read loop because it carries local operating lessons.
 
+## Autopilot Mode
+
+`project-os` should normally run as an autopilot operating system, not a passive planner.
+
+Autopilot goal derivation order:
+
+1. user-stated top-level outcome
+2. repo `KERNEL.md`
+3. `STRATEGY.md`
+4. `PROJECT.md`
+5. `BLOCKERS.md`
+6. machine truth
+
+Autopilot loop:
+
+1. read the hot truth stack
+2. derive one active goal
+3. choose one primary blocker
+4. decide whether the blocker is `0-90` or `90-100`
+5. if `0-90`, repair docs or protocol first
+6. if `90-100`, delegate or execute the smallest blocker-clearing move
+7. update machine truth and execution docs
+8. update repo `KERNEL.md` candidate section only if a local lesson repeated
+
+Do not require the user to manually specify the next loop step unless there is a real fork with non-obvious consequences.
+
+## Main Agent Default
+
+Use these defaults unless the repo has an unusually tiny scope:
+
+- the main agent is not the default implementer
+- the main agent should code only when doing it locally is obviously faster and does not damage project-level attention
+- the main agent should fix the document control plane first, then let subagents execute the final `90-100` implementation loop
+- the main agent should keep autopilot moving unless a real decision fork blocks safe continuation
+
+Interpretation:
+
+- `project-os` is responsible for clarifying the `0-90`
+- workers and loops are responsible for landing the last `90-100`
+- if the main agent is still doing broad implementation, the control plane is probably not frozen enough yet
+
 ## 0-90 / 90-100 Rule
 
 Use this rule aggressively:
@@ -273,6 +320,7 @@ When applying this skill to a repo:
 8. Freeze read/write rules in `HARNESS.md`.
 9. Add `KERNEL.md` if local operating patterns need a stable evolution layer.
 10. Make daily loops read only the hot owner docs, local kernel, and machine truth.
+11. Default the repo to autopilot loop execution unless the user explicitly requests plan-only mode.
 
 When the repo already has a `KERNEL.md`, use the thin kernel writer pattern: only update `Candidate Patterns`, never the stable kernel sections.
 

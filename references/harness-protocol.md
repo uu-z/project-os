@@ -7,6 +7,8 @@ The harness starts only after the document operating system has solved most of t
 - `project-os` handles `0-90`
 - the loop handles `90-100`
 
+Default loop mode is autopilot. The user should not have to manually nominate the next obvious step.
+
 ## Read Order
 
 | Step | Source | Why |
@@ -50,6 +52,13 @@ Do not use the loop to write directly into the global skill surface. Promote thr
 | evidence collection integration | main agent |
 | scope control | main agent |
 
+Default rules:
+
+- the main agent is not the default implementer
+- the main agent should code only when doing it locally is obviously faster and does not damage project-level attention
+- the main agent should repair the document control plane first, then delegate the final `90-100` implementation loop
+- the main agent should keep the autopilot loop advancing unless a real decision fork requires escalation
+
 ## Subagent Role
 
 | Responsibility | Default owner |
@@ -71,3 +80,14 @@ Use this exact compact shape:
 | Evidence collected | what changed reality |
 | Decision needed | what needs escalation |
 | Next 24h | single primary outcome |
+
+## Autopilot Goal Selection
+
+Choose the active goal in this order:
+
+1. explicit user outcome
+2. highest-priority unresolved blocker
+3. highest-value missing `0-90` control-plane gap
+4. smallest credible `90-100` blocker-clearing action
+
+The loop should not ask the user to choose among these unless there is a material tradeoff.

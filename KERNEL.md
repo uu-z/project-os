@@ -28,6 +28,11 @@ It is not the same as:
 | `os-004` | Repo `KERNEL.md` is the local self-evolution layer; `project-os/KERNEL.md` is the cross-project self-evolution layer. | Local patterns should not jump straight into the global skill surface. |
 | `os-005` | `SKILL.md` and `references/` are compiled execution surfaces, not direct auto-growth targets. | Direct self-editing of the skill causes self-corruption. |
 | `os-006` | Only candidate sections are auto-editable by loops. Stable sections require promotion. | This keeps learning possible without destabilizing truth. |
+| `os-007` | The main agent is not the default implementer. | Project-level attention is usually scarcer than coding capacity. |
+| `os-008` | The main agent should code only when doing it locally is obviously faster and does not damage project-level attention. | This preserves throughput without losing command focus. |
+| `os-009` | The main agent should fix the document control plane before delegating the final implementation loop. | Most recurring execution waste comes from unresolved `0-90` ambiguity, not missing code. |
+| `os-010` | `project-os` should default to autopilot when the user does not supply a narrower sub-goal. | The user should not need to micromanage the next obvious loop step. |
+| `os-011` | In autopilot, the system should derive one active goal from `KERNEL -> STRATEGY -> PROJECT -> BLOCKERS -> machine truth`. | This keeps execution aligned to frozen truth instead of chat drift. |
 
 ## Candidate Patterns
 
@@ -62,6 +67,7 @@ Use this section to record tempting but false patterns.
 | `project-os/KERNEL.md` candidate section | May be updated only by cross-project synthesis or a promotion pass. |
 | `project-os/KERNEL.md` stable section | Manual promotion only. |
 | `SKILL.md` and `references/` | Change only after a promoted kernel rule is accepted. |
+| Active goal selection | In autopilot mode, derive it from the hot truth stack rather than asking the user to choose every time. |
 
 Writer:
 

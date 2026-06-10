@@ -11,6 +11,28 @@ It pushes most project ambiguity into a small source-of-truth doc stack first, t
 
 If the docs are right, the project should mostly already be right.
 
+## Default autopilot
+
+`project-os` should normally run in autopilot.
+
+That means:
+
+- if the user gives a clear top-level outcome, use it
+- if the user does not give a narrower sub-goal, derive the next active goal automatically
+- do not wait for the user to manually pick every loop step
+
+Autopilot reads:
+
+```text
+KERNEL.md
+-> STRATEGY.md
+-> PROJECT.md
+-> BLOCKERS.md
+-> machine truth
+```
+
+Then it picks one active goal, usually the highest-value blocker-moving step.
+
 ## Evolution model
 
 `project-os` now uses a two-kernel model:
@@ -90,6 +112,7 @@ Install or copy this skill into your Codex skills directory as `project-os`, the
 - a stable read/write protocol
 - less “thinking while doing”
 - a narrow execution loop against frozen project truth
+- default autopilot loop execution without requiring manual sub-goal selection
 
 ## Design rules
 
