@@ -21,6 +21,12 @@ If the repo already has docs, audit them before trusting them.
 
 When terminology, boundaries, stage labels, or ownership are unclear, use a `grill-with-docs` style pass first: inspect code and docs, resolve what can be resolved from source, then ask only the smallest missing questions.
 
+Also separate three different kinds of truth before writing anything:
+
+- domain truth
+- local project operating truth
+- global `project-os` operating truth
+
 ## Core Model
 
 Treat project truth as three layers:
@@ -43,13 +49,15 @@ The intent is also simple:
 - solve most project problems at the doc layer first
 - leave only the final implementation and verification gap to the execution loop
 
-Before those three layers, some repos also need one deeper base:
+Before those three layers, some repos also need two deeper bases:
 
 | Layer | Purpose | Change Rate | Truth Form |
 |---|---|---:|---|
 | `L0 domain kernel` | Define the canonical domain vocabulary and concept boundaries | Very slow | `CONTEXT.md` or equivalent glossary/kernel doc |
+| `L0.5 project kernel` | Define repo-specific operating patterns and local evolution candidates | Slow | `KERNEL.md` |
 
-Use this when the project keeps losing time to terminology drift, synonym drift, or architecture arguments caused by fuzzy language.
+Use `CONTEXT.md` when the project keeps losing time to terminology drift, synonym drift, or architecture arguments caused by fuzzy language.
+Use repo `KERNEL.md` when the project keeps rediscovering the same operating lesson during loops.
 
 ## Standard Doc Stack
 
@@ -82,6 +90,21 @@ Rules:
 - daily loops should not reread the whole `CONTEXT.md` by default
 - agents should reread `CONTEXT.md` only when terminology, ownership, boundary, or protocol meaning is unclear
 
+## Optional Repo `KERNEL.md`
+
+When the repo has repeated execution patterns worth preserving, add or preserve one local `KERNEL.md`:
+
+| File | Layer | Answers |
+|---|---|---|
+| `KERNEL.md` | `L0.5 project kernel` | What repo-specific operating patterns are stable, which local patterns are still candidates, and what may later promote into `project-os` itself |
+
+Rules:
+
+- repo `KERNEL.md` is local operating truth, not global skill truth
+- repo `KERNEL.md` is short enough to stay in the hot loop when present
+- only the candidate section should be auto-edited by ordinary project loops
+- repo `KERNEL.md` may feed `project-os/KERNEL.md`, but should not bypass it
+
 ## Missing-Docs Mode
 
 When the repo does not already have the required owner docs:
@@ -91,6 +114,7 @@ When the repo does not already have the required owner docs:
 3. use a `grill-with-docs` style pass to resolve ambiguous terms and boundaries
 4. create the minimum owner docs needed for the standard stack
 5. freeze the read/write protocol in `HARNESS.md`
+6. create `KERNEL.md` if the repo already shows repeated local operating lessons
 
 Do not wait for perfect documentation before creating the control plane. The first correct version should be small, table-first, and explicit about assumptions.
 
@@ -127,6 +151,7 @@ Enforce these rules:
 6. `HARNESS.md` owns the daily loop protocol and agent behavior.
 7. Machine artifacts own current runtime facts.
 8. `CONTEXT.md`, when present, owns canonical domain language and anti-synonym rules.
+9. Repo `KERNEL.md`, when present, owns repo-specific operating patterns and promotion candidates.
 
 If a fact already has an owner document, all other docs must reference it rather than redefining it.
 
@@ -152,11 +177,13 @@ Everything else should default to a table:
 - evidence
 - escalation rules
 - read/write rules
+- promotion rules
 
 For ready-made table shapes, read:
 
 - [references/doc-templates.md](references/doc-templates.md)
 - [references/harness-protocol.md](references/harness-protocol.md)
+- [references/kernel-protocol.md](references/kernel-protocol.md)
 - [references/doc-audit.md](references/doc-audit.md)
 
 ## Write Rules
@@ -170,6 +197,7 @@ Default write policy:
 | `ENGINEERING.md` | Low |
 | `PROJECT.md` | Daily / milestone-based |
 | `BLOCKERS.md` | Every meaningful loop |
+| `KERNEL.md` candidate section | On repeated local learning only |
 | `HARNESS.md` | Rare |
 | Machine artifacts | Automated |
 
@@ -179,24 +207,27 @@ Agents should not casually rewrite decision-layer docs during daily execution.
 
 Default read order:
 
-1. `STRATEGY.md`
-2. `ARCHITECTURE.md`
-3. `ENGINEERING.md`
-4. `PROJECT.md`
-5. `BLOCKERS.md`
-6. `HARNESS.md`
-7. active machine truth
+1. `KERNEL.md` when present
+2. `STRATEGY.md`
+3. `ARCHITECTURE.md`
+4. `ENGINEERING.md`
+5. `PROJECT.md`
+6. `BLOCKERS.md`
+7. `HARNESS.md`
+8. active machine truth
 
 Default write-back order:
 
 1. update machine truth through the normal system path
 2. update `BLOCKERS.md`
 3. update `PROJECT.md`
-4. update `HARNESS.md` only if the protocol itself changed
+4. update repo `KERNEL.md` candidate section only when the same local lesson has repeated
+5. update `HARNESS.md` only if the protocol itself changed
 
 Do not rewrite `STRATEGY.md`, `ARCHITECTURE.md`, or `ENGINEERING.md` unless a real decision changed.
 
 `CONTEXT.md` is not in the default hot read loop. Read it on demand when the loop hits a language or boundary ambiguity.
+Repo `KERNEL.md`, when present, is part of the default hot read loop because it carries local operating lessons.
 
 ## 0-90 / 90-100 Rule
 
@@ -211,6 +242,23 @@ If the team is still arguing daily about stage, scope, ownership, or what "done"
 
 Do not spend implementation effort to compensate for missing control-plane clarity when that clarity should live in the docs.
 
+## Evolution Pipeline
+
+Use this pipeline:
+
+```text
+repo loop
+-> repo KERNEL.md
+-> project-os KERNEL.md
+-> SKILL.md / references
+```
+
+Do not allow:
+
+```text
+repo loop -> direct SKILL.md growth
+```
+
 ## Adoption Workflow
 
 When applying this skill to a repo:
@@ -223,7 +271,8 @@ When applying this skill to a repo:
 6. Collapse the control plane into the standard doc stack.
 7. Move unstable operational status into execution-layer docs or machine artifacts.
 8. Freeze read/write rules in `HARNESS.md`.
-9. Make daily loops read only the owner docs and machine truth.
+9. Add `KERNEL.md` if local operating patterns need a stable evolution layer.
+10. Make daily loops read only the hot owner docs, local kernel, and machine truth.
 
 ## Anti-Patterns
 

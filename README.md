@@ -11,6 +11,24 @@ It pushes most project ambiguity into a small source-of-truth doc stack first, t
 
 If the docs are right, the project should mostly already be right.
 
+## Evolution model
+
+`project-os` now uses a two-kernel model:
+
+- repo `KERNEL.md`: local self-evolution layer for one project
+- `project-os/KERNEL.md`: cross-project self-evolution layer for the operating system itself
+
+Evolution pipeline:
+
+```text
+repo loop
+-> repo KERNEL.md
+-> project-os/KERNEL.md
+-> SKILL.md / references
+```
+
+This means the skill does not grow directly from one project's noise.
+
 ## What it creates
 
 Default owner-doc stack:
@@ -26,18 +44,21 @@ Default owner-doc stack:
 Optional base layer:
 
 - `CONTEXT.md` for domain language, terminology boundaries, and anti-synonym drift
+- `KERNEL.md` for repo-specific operating patterns and promotion candidates
 
 ## Repository layout
 
 ```text
 .
+├── KERNEL.md
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
 └── references/
     ├── doc-audit.md
     ├── doc-templates.md
-    └── harness-protocol.md
+    ├── harness-protocol.md
+    └── kernel-protocol.md
 ```
 
 ## Usage
@@ -45,6 +66,7 @@ Optional base layer:
 Install or copy this skill into your Codex skills directory as `project-os`, then invoke it when a repo needs:
 
 - one owner doc per important question
+- one repo-level self-evolution layer
 - a stable read/write protocol
 - less “thinking while doing”
 - a narrow execution loop against frozen project truth

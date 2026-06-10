@@ -12,6 +12,17 @@ Use these as the default table shapes for the control-plane docs.
 | Boundaries | boundary table |
 | Stable invariants | invariant table |
 
+## `KERNEL.md`
+
+| Section | Recommended structure |
+|---|---|
+| One sentence | repo operating-kernel definition |
+| Stable patterns | stable-pattern table |
+| Candidate patterns | candidate table |
+| Promotion upstream | promotion table |
+| Rejected patterns | rejection table |
+| Update protocol | write-rule table |
+
 ## `STRATEGY.md`
 
 | Section | Recommended structure |

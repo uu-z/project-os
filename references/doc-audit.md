@@ -13,6 +13,16 @@ Use this reference when a repo already has documentation and you need to decide 
 | Structure | Is prose hiding what should be a table? | convert to structured format |
 | Loop fit | Should daily loops read it, write it, or ignore it? | assign explicit loop role |
 
+## `KERNEL.md` Test
+
+When a repo has a `KERNEL.md`, ask:
+
+| Question | Good sign | Bad sign |
+|---|---|---|
+| Is it storing repo-specific operating lessons instead of generic strategy prose? | repeated local rules, promotion candidates, write protocol | duplicate goals, duplicate milestones, duplicate blocker board |
+| Is only the candidate section auto-growable? | yes | no; the whole doc mutates freely |
+| Does it feed the global skill through promotion instead of bypassing it? | yes | repo loop edits `SKILL.md` directly |
+
 ## 0-90 Test
 
 Use this forcing question during audits:

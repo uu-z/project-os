@@ -11,13 +11,14 @@ The harness starts only after the document operating system has solved most of t
 
 | Step | Source | Why |
 |---|---|---|
-| 1 | `STRATEGY.md` | confirm target and scope |
-| 2 | `ARCHITECTURE.md` | confirm single-track system shape |
-| 3 | `ENGINEERING.md` | confirm official commands and evidence rules |
-| 4 | `PROJECT.md` | confirm stage and milestone context |
-| 5 | `BLOCKERS.md` | confirm current priority |
-| 6 | `HARNESS.md` | confirm loop protocol |
-| 7 | machine truth | confirm real runtime state |
+| 1 | repo `KERNEL.md` when present | confirm local operating lessons |
+| 2 | `STRATEGY.md` | confirm target and scope |
+| 3 | `ARCHITECTURE.md` | confirm single-track system shape |
+| 4 | `ENGINEERING.md` | confirm official commands and evidence rules |
+| 5 | `PROJECT.md` | confirm stage and milestone context |
+| 6 | `BLOCKERS.md` | confirm current priority |
+| 7 | `HARNESS.md` | confirm loop protocol |
+| 8 | machine truth | confirm real runtime state |
 
 `CONTEXT.md` is not part of the default hot loop. Re-read it only when:
 
@@ -32,9 +33,12 @@ The harness starts only after the document operating system has solved most of t
 |---|---|
 | Decision-layer docs | change rarely |
 | Execution-layer docs | update during loops |
+| Repo `KERNEL.md` stable sections | change rarely |
+| Repo `KERNEL.md` candidate section | update only on repeated local learning |
 | Machine truth | never hand-edit; refresh through system actions |
 
 Do not use the loop to rediscover missing strategy, ownership, or architecture. Fix those in the owner docs first.
+Do not use the loop to write directly into the global skill surface. Promote through kernels.
 
 ## Main Agent Role
 
