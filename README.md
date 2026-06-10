@@ -87,6 +87,29 @@ python3 scripts/kernel_writer.py upsert \
 
 This command edits only the `## Candidate Patterns` table.
 
+## Bootstrap a new repo
+
+Use the bootstrap script to create the minimum `project-os` control plane in a new repo:
+
+```bash
+python3 scripts/bootstrap_project_os.py --root /path/to/repo --project-name "My Project"
+```
+
+This creates:
+
+- `CONTEXT.md`
+- `KERNEL.md`
+- `STRATEGY.md`
+- `ARCHITECTURE.md`
+- `ENGINEERING.md`
+- `PROJECT.md`
+- `BLOCKERS.md`
+- `HARNESS.md`
+- `artifacts/current/README.md`
+- `.project-os-bootstrap.json`
+
+It does not overwrite existing files unless `--overwrite` is passed.
+
 ## What it creates
 
 Default owner-doc stack:
@@ -111,8 +134,10 @@ Optional base layer:
 ├── KERNEL.md
 ├── SKILL.md
 ├── scripts/
+│   ├── bootstrap_project_os.py
 │   ├── kernel_writer.py
 │   └── tests/
+│       ├── test_bootstrap_project_os.py
 │       └── test_kernel_writer.py
 ├── agents/
 │   └── openai.yaml
