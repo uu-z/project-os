@@ -110,6 +110,32 @@ This creates:
 
 It does not overwrite existing files unless `--overwrite` is passed.
 
+## Derive the active goal
+
+Use the autopilot goal derivation script to turn the current truth stack into one active goal:
+
+```bash
+python3 scripts/derive_active_goal.py --root /path/to/repo
+```
+
+JSON mode:
+
+```bash
+python3 scripts/derive_active_goal.py --root /path/to/repo --json
+```
+
+Priority order:
+
+1. first concrete P0 blocker
+2. incomplete `0-90` control-plane truth
+3. missing machine-truth ownership
+4. next verification / rehearsal step
+
+Supported layouts:
+
+- root control-plane docs such as `STRATEGY.md`
+- nested ACTUM-style docs such as `docs/actum/STRATEGY.md`
+
 ## What it creates
 
 Default owner-doc stack:
@@ -135,9 +161,11 @@ Optional base layer:
 ├── SKILL.md
 ├── scripts/
 │   ├── bootstrap_project_os.py
+│   ├── derive_active_goal.py
 │   ├── kernel_writer.py
 │   └── tests/
 │       ├── test_bootstrap_project_os.py
+│       ├── test_derive_active_goal.py
 │       └── test_kernel_writer.py
 ├── agents/
 │   └── openai.yaml

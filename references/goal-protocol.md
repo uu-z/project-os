@@ -31,6 +31,11 @@ That means:
 5. `BLOCKERS.md`
 6. machine truth
 
+The derivation tool may read either:
+
+- root control-plane docs
+- nested control-plane docs such as `docs/actum/*`
+
 ## Goal quality bar
 
 A good active goal is:
